@@ -28,7 +28,10 @@ ${TARGET}: ${OBJS}
 	${LD} -o $@ $^ ${LDFLAGS}
 
 ${OBJDIR}/%.o: ${SRCDIR}/%.cpp
-	@[ -d ${OBJDIR} ]
+	if [ ! -d ${OBJDIR} ]; then \
+		mkdir ${OBJDIR}; \
+	fi
+	@ [ -d ${OBJDIR} ]
 	${CXX} ${CXXFLAGS} -o $@ -c $<
 
 .PHONY: all clean
